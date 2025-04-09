@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Äänestyssovellus</title>
+    <link rel="icon" href="/vessapaperi.png" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link rel="stylesheet" href="tyylit.css">
+</head>
+<body>
+    <nav class="navbar bg-dark border-bottom border-body justify-content-center navbar-expand-sm" data-bs-theme="dark">
+        <div class="container d-flex align-items-center">
+            <p class="navbar-brand fs-3 m-0 me-5">Arjen äänestyksiä</p>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse ms-2" id="navbarSupportedContent">
+                <ul class="navbar-nav d-flex flex-row flex-column flex-sm-row align-items-start align-items-sm-center w-100">
+                    <li class="nav-item me-2">
+                        <button type="button" class="nav-link btn btn-primary w-100 w-sm-auto" data-bs-toggle="modal" data-bs-target="#aanestys">Luo äänestys</button>
+                    </li>
+                    <li class="nav-item ms-sm-auto">
+                        <a href="index.html" class="nav-link btn w-100 w-sm-auto text-primary">Kirjaudu ulos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="modal fade" id="aanestys" tabindex="-1" aria-labelledby="aanestysModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="aanestysModalLabel">Luo uusi äänestys</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Sulje"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="aanestysform">
+                        <div class="mb-3">
+                            <label for="kysymys" class="form-label">Kysymys</label>
+                            <input type="text" class="form-control" id="kysymys" placeholder="Kirjoita kysymys">
+                        </div>
+                        <div id="vaihtoehdot">
+                            <div class="mb-3">
+                                <label class="form-label">Vaihtoehto 1</label>
+                                <input type="text" class="form-control vaihtoehto" placeholder="Kirjoita vaihtoehto">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Vaihtoehto 2</label>
+                                <input type="text" class="form-control vaihtoehto" placeholder="Kirjoita vaihtoehto">
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-secondary" id="lisaavaihtoehto">Lisää vaihtoehto</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Peruuta</button>
+                    <button type="button" class="btn btn-primary" id="luoAanestysOk">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="aanestykset" class="d-flex justify-content-center"></div>
+    <script src="admin.js"></script>
+    <script src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>  
+</body>
+</html>

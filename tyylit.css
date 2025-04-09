@@ -6,6 +6,6 @@ body {
     background-color: #5c5e60;
 }
 
-label, h5 {
+label, h5, p, li {
     color: white;
 }

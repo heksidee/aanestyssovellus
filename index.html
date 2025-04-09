@@ -18,10 +18,10 @@
             <div class="collapse navbar-collapse ms-2" id="navbarSupportedContent">
                 <ul class="navbar-nav d-flex">
                     <li class="nav-item me-2">
-                        <button type="button" class="nav-link btn btn-secondary" data-bs-toggle="modal" data-bs-target="#rekisteröidy">Rekisteröidy</button>
+                        <button type="button" class="nav-link btn btn-primary" data-bs-toggle="modal" data-bs-target="#rekisteröidy">Rekisteröidy</button>
                     </li>
                     <li class="nav-item">
-                        <button type="button" class="nav-link btn btn-secondary" data-bs-toggle="modal" data-bs-target="#kirjaudu">Kirjaudu</button>
+                        <button type="button" class="nav-link btn btn-primary" data-bs-toggle="modal" data-bs-target="#kirjaudu">Kirjaudu</button>
                     </li>
                 </ul>
             </div>
@@ -31,7 +31,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="register">Luo käyttäjänimi</h5>
+                    <h5 class="modal-title" id="register">Rekisteröidy</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Sulje"></button>
                 </div>
                 <div class="modal-body">
@@ -39,16 +39,24 @@
                         <div class="mb-3">
                             <label for="newusername" class="form-label">Käyttäjänimi</label>
                             <input type="text" class="form-control" id="newusername" placeholder="Syötä käyttäjänimi">
+                            <p id="käyttäjänimi">Käyttäjänimi saa sisältää vain kirjaimia tai numeroita.</p>
                         </div>
                         <div class="mb-3">
                             <label for="newpassword" class="form-label">Salasana</label>
                             <input type="password" class="form-control" id="newpassword" placeholder="Syötä salasana">
+                            <p id="salasana">Salasanan tulee sisältää vähintää 6 merkkiä, joista vähintään yhden on oltava iso kirjain ja yhden numero.</p>
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sulje</button>
-                    <button type="button" class="btn btn-primary">Luo tili</button>
+                <div class="modal-footer d-flex align-items-center justify-content-between">
+                    <div class="form-check d-flex align-items-center">
+                        <input class="form-check-input me-2" type="checkbox" id="admin">
+                        <label class="form-check-label mb-0" for="admin">Rekisteröidy ylläpitäjäksi</label>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sulje</button>
+                        <button type="button" class="btn btn-primary" id="luotili">Luo tili</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -79,6 +87,7 @@
             </div>
         </div>
     </div>
+    <script src="main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>  
 </body>
 </html>
