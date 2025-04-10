@@ -1,0 +1,25 @@
+<nav class="navbar bg-dark border-bottom border-body justify-content-center navbar-expand-sm" data-bs-theme="dark">
+    <div class="container d-flex align-items-center">
+        <p class="navbar-brand fs-3 m-0 me-5">Arjen äänestyksiä</p>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse ms-2" id="navbarSupportedContent">
+            <ul class="navbar-nav d-flex flex-row flex-column flex-sm-row align-items-start align-items-sm-center w-100">
+                <li class="nav-item me-2">
+                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                        <input type="radio" class="btn-check" name="role" id="adminbtn" autocomplete="off">
+                        <label class="btn btn-primary" for="adminbtn">Ylläpitäjä</label>
+
+                        <input type="radio" class="btn-check" name="role" id="userbtn" autocomplete="off">
+                        <label class="btn btn-primary" for="userbtn">Käyttäjä</label>
+                    </div>
+                    <button type="button" class="nav-link btn btn-primary w-100 w-sm-auto" data-bs-toggle="modal" data-bs-target="#aanestys">Luo äänestys</button>
+                </li>
+                <li class="nav-item ms-sm-auto">
+                    <a href="index.html" class="nav-link btn w-100 w-sm-auto text-primary text-decoration-underline">Kirjaudu ulos</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

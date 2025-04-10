@@ -9,3 +9,26 @@ body {
 label, h5, p, li {
     color: white;
 }
+
+.btn-group-vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.btn-check + label {
+    border: 2px solid #0d6efd !important;
+    background-color: transparent;
+    color: white;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+.btn-check:checked + label {
+    border: none;
+    background-color: #0d6efd !important;
+    color: white !important;
+}
+.btn-check + label:hover {
+    opacity: 0.8;
+}
