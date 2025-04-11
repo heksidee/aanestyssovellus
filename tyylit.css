@@ -9,6 +9,9 @@ body {
 label, h5, p, li {
     color: white;
 }
+p {
+    font-size: larger;
+}
 
 .btn-group-vertical {
     display: flex;

@@ -3,7 +3,7 @@ let userBtn = document.getElementById("userbtn");
 let aanestyksenLuontiPainike = document.getElementById("luoaanestys");
 
 document.querySelectorAll('input[name="role"]').forEach((radio) => {
-    radio.addEventListener('change', () => {
+    radio.addEventListener('change', () => {        /**LUO ÄÄNESTYS PAINIKE */
         if (adminBtn.checked) {
             if (!document.getElementById("votingbtn")) {
                 let luoAanestysBtn = document.createElement("button");
@@ -17,7 +17,7 @@ document.querySelectorAll('input[name="role"]').forEach((radio) => {
             }
         } else {
             let nakyvaBtn = document.getElementById("votingbtn");
-            if (nakyvaBtn) {
+            if (nakyvaBtn) {                    /**POISTA LUON ÄÄNESTYS PAINIKE */
                 nakyvaBtn.remove();
             }
         }
@@ -37,7 +37,9 @@ document.getElementById("lisaavaihtoehto").addEventListener("click", function() 
     vaihtoehtoElementti.appendChild(uusiVaihtoehto);
 });
 
+let äänestysLaskin = 0;
 document.getElementById("luoAanestysOk").addEventListener("click", function() {
+    äänestysLaskin++;
     let question = document.getElementById("kysymys").value;
     let alternatives = Array.from(document.querySelectorAll(".vaihtoehto")).map(opt => opt.value).filter(v => v.trim() !== "");
 
@@ -45,6 +47,7 @@ document.getElementById("luoAanestysOk").addEventListener("click", function() {
         let aanestysElementti = document.getElementById("aanestykset");
         let uusiAanestys = document.createElement("div");
         uusiAanestys.classList.add("m-3", "p-3", "border", "rounded", "voting");
+        uusiAanestys.setAttribute("data-aanestys-id", `aanestys${äänestysLaskin}`);
 
         let kysymysElementti = document.createElement("h5");
         kysymysElementti.textContent = question;
@@ -60,16 +63,17 @@ document.getElementById("luoAanestysOk").addEventListener("click", function() {
             
             let uusiInput = document.createElement("input");
             uusiInput.type = "radio";
-            uusiInput.name = "aanestys";
+            uusiInput.name = `aanestys${äänestysLaskin}`;
             uusiInput.value = alternative;
-            uusiInput.id = `alternative${index + 1}`;
+            uusiInput.id = `alternative${äänestysLaskin}-${index + 1}`;
             uusiInput.classList.add("btn-check");
             uusiInput.autocomplete = "off";
 
             let uusiLabel = document.createElement("label");
-            uusiLabel.htmlFor = `alternative${index + 1}`;
+            uusiLabel.htmlFor = `alternative${äänestysLaskin}-${index + 1}`;
             uusiLabel.textContent = alternative;
             uusiLabel.classList.add("btn", "btn-outline-light");
+            uusiLabel.setAttribute("data-alternative", alternative);
 
             uusiDiv.appendChild(uusiInput);
             uusiDiv.appendChild(uusiLabel);
@@ -102,15 +106,54 @@ document.getElementById("luoAanestysOk").addEventListener("click", function() {
     päivitäÄänestysPoisto();
 });
 
-function poistaAanestys(event) {                            /**ÄÄNESTYKSEN POISTO EI ONNISTU */
-    let aanestyksenPoisto = event.target.closest(".voting");
+function poistaAanestys(event) {
+    let targetElement = event.target;
+    let aanestyksenPoisto = targetElement.closest(".voting");
     if (aanestyksenPoisto) {
-        aanestyksenPoisto.remove();
+        let vahvistus = confirm("Haluatko varmasti poistaa äänestyksen");
+        if (vahvistus) {
+            aanestyksenPoisto.remove();
+        }
     }
 }
 
-function äänestysFunctio() {
-    console.log("äänestys!");
+let äänestysData = {};
+function äänestysFunctio(äänestysElementti) {
+    
+    let valittuVaihtoehto = äänestysElementti.querySelector(`input[type="radio"]:checked`);
+    if (!valittuVaihtoehto) {
+        alert("Valitse jokin vaihtoehto");
+        return;
+    }
+    let äänestysId = äänestysElementti.getAttribute("data-aanestys-id");
+    let vaihtoehtoSisältö = valittuVaihtoehto.value;
+
+    if (!äänestysData[äänestysId]) {
+        äänestysData[äänestysId] = {};
+    }
+    if (!äänestysData[äänestysId][vaihtoehtoSisältö]) {
+        äänestysData[äänestysId][vaihtoehtoSisältö] = 0;
+    }
+    äänestysData[äänestysId][vaihtoehtoSisältö]++;
+
+    päivitäGrafiikka(äänestysElementti, äänestysData[äänestysId]);
+}
+
+function päivitäGrafiikka(äänestysElementti, äänet) {
+    
+    let kokonaisÄänet = Object.values(äänet).reduce((sum, count) => sum + count, 0);
+
+    äänestysElementti.querySelectorAll(".btn-outline-light").forEach(label => {
+        let vaihtoehtoSisältö =label.getAttribute("data-alternative");
+        let ääntenlaskija = äänet[vaihtoehtoSisältö] || 0;
+        let prosentit = kokonaisÄänet > 0 ? (ääntenlaskija / kokonaisÄänet) * 100 : 0;
+
+        label.innerHTML = `
+            ${vaihtoehtoSisältö}
+            <div style="height: 10px; background-color: green; width: ${prosentit}%; margin-top: 5px;"></div>
+            <small>Ääniä ${ääntenlaskija} kpl (${prosentit.toFixed(1)}%)</small>
+            `;
+    });
 }
 
 function päivitäÄänestysPoisto() {
@@ -125,7 +168,7 @@ function päivitäÄänestysPoisto() {
                 let uusiDeleteBtn = document.createElement("button");
                 uusiDeleteBtn.classList.add("btn", "btn-danger", "mt-3");
                 uusiDeleteBtn.textContent = "Poista äänestys";
-                uusiDeleteBtn.addEventListener("click", () => poistaAanestys(vote));
+                uusiDeleteBtn.addEventListener("click", poistaAanestys);
                 vote.appendChild(uusiDeleteBtn);
             }
             if (voteBtn) {
@@ -135,7 +178,7 @@ function päivitäÄänestysPoisto() {
             if (!voteBtn) {
                 let uusiVoteBtn = document.createElement("button");
                 uusiVoteBtn.classList.add("btn", "btn-primary", "mt-3");
-                uusiVoteBtn.textContent = "Ännestä";
+                uusiVoteBtn.textContent = "Äänestä";
                 uusiVoteBtn.addEventListener("click", () => äänestysFunctio(vote));
                 vote.appendChild(uusiVoteBtn);
             }
