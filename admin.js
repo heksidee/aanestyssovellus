@@ -3,7 +3,7 @@ let userBtn = document.getElementById("userbtn");
 let aanestyksenLuontiPainike = document.getElementById("luoaanestys");
 
 document.querySelectorAll('input[name="role"]').forEach((radio) => {
-    radio.addEventListener('change', () => {        
+    radio.addEventListener('change', () => {    /**ÄÄNESTYKSEN LUONTI PAINIKE KUN VALITTU ROOLIKSI ADMIN */     
         if (adminBtn.checked) {
             if (!document.getElementById("votingbtn")) {
                 let luoAanestysBtn = document.createElement("button");
@@ -17,14 +17,14 @@ document.querySelectorAll('input[name="role"]').forEach((radio) => {
             }
         } else {
             let nakyvaBtn = document.getElementById("votingbtn");
-            if (nakyvaBtn) {                    
+            if (nakyvaBtn) {            /**POISTAA LUO ÄÄNESTYS PAINIKKEEN KUN ROOLI VAIHTUU */                
                 nakyvaBtn.remove();
             }
         }
     });
 });
 
-document.getElementById("lisaavaihtoehto").addEventListener("click", function() {
+document.getElementById("lisaavaihtoehto").addEventListener("click", function() {       /**LUO LISÄÄ VAIHTOEHTOJA ÄÄNESTYKSELLE */
     let vaihtoehtoElementti = document.getElementById("vaihtoehdot");
     let vaihtoehtoCount = document.querySelectorAll(".vaihtoehto").length + 1;
 
@@ -37,7 +37,7 @@ document.getElementById("lisaavaihtoehto").addEventListener("click", function() 
     vaihtoehtoElementti.appendChild(uusiVaihtoehto);
 });
 
-let äänestysLaskin = 0;
+let äänestysLaskin = 0;                     /**LUO ÄÄNESTKSEN SIVULLE ANTAMIEN KRITEERIEN MUKAAN */
 document.getElementById("luoAanestysOk").addEventListener("click", function() {
     äänestysLaskin++;
     let question = document.getElementById("kysymys").value;
@@ -86,7 +86,7 @@ document.getElementById("luoAanestysOk").addEventListener("click", function() {
 
         document.getElementById("aanestysform").reset();
 
-        let vaihtoehtoElementti = document.getElementById("vaihtoehdot");
+        let vaihtoehtoElementti = document.getElementById("vaihtoehdot");   /**PALAUTTAA ÄÄNESTYKSEN LUOTNI IKKUNAN ALKUPERÄISEEN */
         vaihtoehtoElementti.innerHTML = `
         <div class="mb-3">
             <label class="form-label">Vaihtoehto 1</label>
@@ -106,7 +106,7 @@ document.getElementById("luoAanestysOk").addEventListener("click", function() {
     päivitäÄänestysPoisto();
 });
 
-function poistaAanestys(event) {
+function poistaAanestys(event) {                /**POISTAA ÄÄNESTYKSEN */
     let targetElement = event.target;
     let aanestyksenPoisto = targetElement.closest(".voting");
     if (aanestyksenPoisto) {
@@ -117,8 +117,8 @@ function poistaAanestys(event) {
     }
 }
 
-let äänestysData = {};
-function äänestysFunctio(äänestysElementti) {
+let äänestysData = {};                      
+function äänestysFunctio(äänestysElementti) {               /**HAKEE ÄÄNESTYKSESTÄ OIKEAN VAIHTOEHDON JOKA VALITTU */
     
     let valittuVaihtoehto = äänestysElementti.querySelector(`input[type="radio"]:checked`);
     if (!valittuVaihtoehto) {
@@ -139,7 +139,7 @@ function äänestysFunctio(äänestysElementti) {
     päivitäGrafiikka(äänestysElementti, äänestysData[äänestysId]);
 }
 
-function päivitäGrafiikka(äänestysElementti, äänet) {
+function päivitäGrafiikka(äänestysElementti, äänet) {           /**PÄIVITTÄÄ ÄÄNESTYKSEN GRAFIIKKAA JA TULOSTA */
     
     let kokonaisÄänet = Object.values(äänet).reduce((sum, count) => sum + count, 0);
 
@@ -156,7 +156,7 @@ function päivitäGrafiikka(äänestysElementti, äänet) {
     });
 }
 
-function päivitäÄänestysPoisto() {
+function päivitäÄänestysPoisto() {              /**PÄIVTTÄÄ ÄÄNESTYKSESSÄ ÄÄNESTÄ JA POISTA ÄÄNESTYS PAINIKETTA ROOLIN MUKAAN */
     let adminValittu = adminBtn.checked;
 
     document.querySelectorAll(".voting").forEach(vote => {
