@@ -3,7 +3,7 @@ let userBtn = document.getElementById("userbtn");
 let aanestyksenLuontiPainike = document.getElementById("luoaanestys");
 
 document.querySelectorAll('input[name="role"]').forEach((radio) => {
-    radio.addEventListener('change', () => {        /**LUO ÄÄNESTYS PAINIKE */
+    radio.addEventListener('change', () => {        
         if (adminBtn.checked) {
             if (!document.getElementById("votingbtn")) {
                 let luoAanestysBtn = document.createElement("button");
@@ -17,7 +17,7 @@ document.querySelectorAll('input[name="role"]').forEach((radio) => {
             }
         } else {
             let nakyvaBtn = document.getElementById("votingbtn");
-            if (nakyvaBtn) {                    /**POISTA LUON ÄÄNESTYS PAINIKE */
+            if (nakyvaBtn) {                    
                 nakyvaBtn.remove();
             }
         }
@@ -110,7 +110,7 @@ function poistaAanestys(event) {
     let targetElement = event.target;
     let aanestyksenPoisto = targetElement.closest(".voting");
     if (aanestyksenPoisto) {
-        let vahvistus = confirm("Haluatko varmasti poistaa äänestyksen");
+        let vahvistus = confirm("Haluatko varmasti poistaa äänestyksen?");
         if (vahvistus) {
             aanestyksenPoisto.remove();
         }
@@ -150,7 +150,7 @@ function päivitäGrafiikka(äänestysElementti, äänet) {
 
         label.innerHTML = `
             ${vaihtoehtoSisältö}
-            <div style="height: 10px; background-color: green; width: ${prosentit}%; margin-top: 5px;"></div>
+            <div style="height: 15px; background-color: green; width: ${prosentit}%; margin-top: 5px;"></div>
             <small>Ääniä ${ääntenlaskija} kpl (${prosentit.toFixed(1)}%)</small>
             `;
     });

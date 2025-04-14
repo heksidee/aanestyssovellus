@@ -1,31 +1,27 @@
 # Äänestyssovellus
 
-Tämä on äänestyssovellus, jossa  uusi käyttäjä rekisteröityy ja tämän jälkeen voi kirjautua sovellukseen sisään.
+Tämä on äänestyssovellus, jossa  käyttäjä valitsee roolikseen joko ylläpitäjä tai äänestäjä.
 
-Kun käyttäjä on kirjautunut sisään sovellukseen, voi hän tarkastella muiden antamia ääniä eri äänestyksissä ja tarkastaa äänestystilanteen. Käyttäjä voi myös valita äänestyksen ja antaa äänen kyseisessä äänestyksessä. Käyttäjä voi antaa vain yhden äänen per äänestys. 
+Sovelluksen eri rooleilla on eri oikeuksia sovelluksessa.
 
-Sovelluksella on myös ylläpitäjä jolla on hieman laajemmat oikeudet käyttäjään verrattuna. Ylläpitäjä voi edellämainittujen asioiden lisäksi myös luoda äänestyksiä ja poistaa niitä.
+Sovelluksella ylläpitäjä voi luoda uusia äänestyksiä sekä poistaa niitä. 
+
+Äänestäjä pääsee näkemään luotuja äänestyksiä ja niiden tilanteita sekä äänestää valitsemaansa äänestystä.
 
 ## Sovelluksen repository
 
 https://github.com/heksidee/aanestyssovellus.git
 
-## Uuden käyttäjän rekisteröityminen
+## Uuden äänestyksen luominen
 
-Käyttäjän tulee rekisteröityä ensimmäisellä kerralla. Käyttäjänimi saa sisältää vain kirjaimia tai numeroita. Jos käyttäjänimi sisältää erikoismerkkejä, antaa sovellus tästä virheilmoituksen. 
+Kun ylläpitäjä luo uuden äänestyksen, on siinä oltava kysymys ja vähintään kaksi vaihtoehtoa. Vaihtoehtoja äänestykseen voi luoda enemmänkin kuin kaksi. Jos tarvittavat kentät äänestyksen luomisessa eivät täytä kriteerejä, antaa sovellus tästä ilmoituksen.
 
-Salasanan tulee sisältää vähintään 6 merkkiä, joista vähintään yhden on oltava iso kirjain ja vähintään yhden numero. Jos nämä ehdot eivät täyty, antaa sovellus tästä virheilmoituksen. 
+## Äänestys
 
-## Sisäänkirjautuminen sovellukseen
+Käyttäjä ei voi antaa tyhjää ääntä, eli sovellus antaa ilmoituksen jos jotain vaihtoehtoa ei ole valittu. Käyttäjä voi äänestää useamman kerran samaa äänestystä. 
 
-Kun sovellukseen kirjaudutaan sisään käyttäjänä tai ylläpitäjänä, tarkastaa sovellus aina käyttäjänimen sekä salasanan. Jos edellämainitut ovat hyväksyttyjä, päästää sovellus kirjautumaan sisään. Jos jompikumpi, käyttäjänimi tai salasana, eivät täsmää antaa sovellus siitä ilmoituksen.
+Käyttäjälle näkyy äänijakauma ja grafiikka kyseisen äänestyksen tilanteesta.
 
-## Käyttäjän sisäänkirjauduttua
+## Äänestyksen poistaminen
 
-Kun käyttäjä on kirjautunut sisään sovellukseen, näkee hän etusivulla ylläpitäjän tekemiä äänestyksiä sekä muiden käyttäjien antamat äänet äänestyksissä. 
-
-Käyttäjän on mahdollista äänestää luoduissa äänestyksissä. Rajoituksena käyttäjällä on kuitenkin yksi ääni per äänestys. Sovellus tarkastaa tämän ehdon aina ja jos käyttäjä yrittää antaa toisen äänen äänestyksessä, antaa sovellus tästä virheilmoituksen. 
-
-## Ylläpitäjän sisäänkirjauduttua
-
-Ylläpitäjä voi tarkastaa ääniä joita on annettu äänestyksissä ja niiden tilanteen. Ylläpitäjä voi myös luoda uusia äänestyksiä sekä poistaa näitä. 
+Kun ylläpitäjä poistaa äänestystä, kysyy sovellus aina varmistuksen, haluaako ylläpitäjä varmasti poistaa äänestyksen. 
